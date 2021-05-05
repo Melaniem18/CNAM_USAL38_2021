@@ -1,5 +1,5 @@
 <?php
-require_once("connexion.php");
+require_once("connexionPDO.php");
 
 $code = $_POST['code'];
 $nom = $_POST['nom'];

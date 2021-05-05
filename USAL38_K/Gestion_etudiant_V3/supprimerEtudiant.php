@@ -1,5 +1,5 @@
 <?php
-require_once ("connexion.php");
+require_once ("connexionPDO.php");
 
 $code = $_GET['code'];
 $sql = "delete from etudiant where code = $code";
@@ -8,7 +8,7 @@ if ($conn->query($sql) !== TRUE) {
     echo "Error deleting record: " . $conn->error;
   }
 
-  $conn->close();
+  $conn->null;
 
   // Redirect
   header("location:afficherEtudiant.php");

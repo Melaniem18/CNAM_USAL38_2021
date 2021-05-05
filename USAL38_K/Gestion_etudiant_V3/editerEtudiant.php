@@ -1,12 +1,21 @@
 <?php
 
 $code = $_GET['code'];
-require_once ("connexion.php");
+require_once ("connexionPDO.php");
 
-$req = "select code, nom, mail from etudiant where code = $code";
-$rs = $conn->query($req);
+// $req = "select code, nom, mail from etudiant where code = $code";
+// $rs = $conn->query($req);
 
-$row = $rs->fetch_assoc();
+
+$stmt = $conn->prepare("select code, nom, mail from etudiant where code = $code");
+$stmt->bindParam(':code', $code);
+$stmt->bindParam(':nom', $nom);
+$stmt->bindParam(':mail', $mail);
+
+// Exécution de la requête sql
+$stmt->execute();
+
+$row = $stmt->fetch( PDO::FETCH_ASSOC );
 
 ?>
 
@@ -47,6 +56,7 @@ $row = $rs->fetch_assoc();
 
 <?php
 
-$conn->close();
+$conn->null;
+// $this->$conn->close();
 
 ?>
